@@ -22,17 +22,17 @@ function App() {
       }
     }
     getProducts();
+    console.log(data)
   }, [data])
-
 
   return (
     <>
       <h1>Registro de productos </h1>
       {!form &&
-        <DataTable data={data} />
+        <DataTable setForm={setForm} />
       }
       {form &&
-        <FormProducts />
+        <FormProducts setForm={setForm} />
       }
     </>
   )

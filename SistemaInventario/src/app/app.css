@@ -3,12 +3,22 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    box-sizing: border-box;
+    flex-direction: column;
+    padding: 0.1rem;
 }
 
 h1 {
-    font-size: 5rem;
+    font-size: 3rem;
     text-align: center;
     color: brown;
     width: 40rem;
-    height: 10rem;
+    height: 5rem;
+}
+
+button {
+    border-radius: 0.3rem;
+    border: none;
+    width: 5rem;
+    height: 1.9rem;
 }

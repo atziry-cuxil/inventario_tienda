@@ -3,7 +3,7 @@ import { postProductShema } from "./productShema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import './form.css'
 
-const FormProducts = () => {
+const FormProducts = ({ setForm }) => {
     const formDefault = {
         codigo: '',
         nombre: '',
@@ -27,10 +27,12 @@ const FormProducts = () => {
     const onSubmit = (data) => {
         console.log('hola')
         console.log(data)
+        setForm(false)
     }
 
     const error = (error) => {
         console.log(error)
+        setForm(true)
     }
 
     return (
@@ -75,8 +77,9 @@ const FormProducts = () => {
                     <label htmlFor="estado">Estado: </label>
                     <input type="text" id="estado" name="estado" {...register('estado')} />
                 </div>
-                <button type="submit"> Enviar </button>
+                <button type="submit" className="buttonEnviar"> Enviar </button>
             </form>
+            <button type="button" className="buttonCancel" onClick={() => setForm(false)}> Cancelar </button>
         </div >
     )
 }

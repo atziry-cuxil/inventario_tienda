@@ -1,5 +1,11 @@
 th {
     color: green;
+    border: 0.2rem solid gray;
+}
+
+td {
+    color: black;
+    border: 0.1rem solid black;
 }
 
 .table {
@@ -16,4 +22,23 @@ th {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+}
+
+.buttonDelete {
+    color: white;
+    background-color: red;
+}
+
+.buttonUpdate {
+    color: white;
+    background-color: blue;
+}
+
+.buttonPost {
+    width: 7rem;
+    height: 2rem;
+    color: white;
+    background-color: green;
+    margin: 1rem;
 }

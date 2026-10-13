@@ -8,9 +8,9 @@ import { pool } from './src/config/database.js';
 const app = express();
 
 app.use(cors({
-    origin: 'http://localhost:5174',
+    origin: 'http://localhost:5175',
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization']
+    //allowedHeaders: ['Content-Type', 'Authorization']
 }))
 
 app.use(express.json());
@@ -28,5 +28,4 @@ try {
     console.log('error de try catch')
     await pool.end();
 }
-
 
