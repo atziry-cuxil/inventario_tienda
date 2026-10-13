@@ -1,0 +1,19 @@
+th {
+    color: green;
+}
+
+.table {
+    border: 0.3rem solid black;
+    width: 50rem;
+    height: auto;
+}
+
+.tableRow {
+    border: 0.3rem solid black;
+}
+
+.tableFlex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
