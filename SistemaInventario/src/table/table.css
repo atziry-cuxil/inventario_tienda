@@ -51,3 +51,8 @@ td {
     border: none;
     border-radius: 0.5rem;
 }
+
+.detalle{
+    color: white;
+    background-color: green;
+}

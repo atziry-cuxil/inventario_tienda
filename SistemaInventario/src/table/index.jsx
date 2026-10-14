@@ -1,22 +1,11 @@
 import './table.css'
 import { apiClient } from '../api'
+import React from 'react'
+import { Notify } from '../components'
 
-const DataTable = ({ setForm, data, setIdUpdate, setData }) => {
-
-    const onDelete = async (id) => {
-        try {
-            const response = await apiClient.delete(`/${id}`)
-            try {
-                const response = await apiClient.get('/')
-                return setData(response?.data?.data)
-            } catch (error) {
-                console.log(error)
-            }
-            return console.log(response.message)
-        } catch (error) {
-            console.log(error)
-        }
-    }
+const DataTable = ({ setForm, data, setIdUpdate, setData, setIdDetalle }) => {
+    const [confirm, setConfirm] = React.useState(false)
+    const [id, setId] = React.useState(null)
 
     return (
         <>
@@ -49,16 +38,17 @@ const DataTable = ({ setForm, data, setIdUpdate, setData }) => {
                                 <td>
                                     <button type='button' className='buttonUpdate' onClick={() => {
                                         setIdUpdate(product.producto_id)
-                                        setForm(true)
                                     }}  >Editar </button>
-                                    <button type='button' className='buttonDelete' onClick={() => onDelete(product.producto_id)}> Eliminar</button>
+                                    <button type='button' className='buttonDelete' onClick={() => (setConfirm(true), setId(product.producto_id))}> Eliminar</button>
+                                    <button type='button' className='detalle' onClick={() => (setForm('detalle'), setIdDetalle(product.producto_id))}> ver </button>
                                 </td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
-                <button type='button' className="buttonPost" onClick={() => setForm(true)}> Agregar Producto </button>
-            </div>
+                {confirm && <Notify setConfirm={setConfirm} id={id} setData={setData} />}
+                <button type='button' className="buttonPost" onClick={() => setForm('positivo')}> Agregar Producto </button>
+            </div >
         </>
     )
 }

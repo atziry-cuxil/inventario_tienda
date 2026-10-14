@@ -25,11 +25,11 @@ const postProductShema = z.object({
         .min(1, 'Debe tener al menos un caracter')
         .max(50, 'No debe tener mas de 50 caracteres'),
     precio: z
-        .number()
+        .number('El dato debe ser numerico')
         .positive(0, 'Debe ser un numero mayor a 0')
         .min(1, 'Debe tener al menos un caracter'),
     stock: z
-        .number()
+        .number('El dato debe ser numerico')
         .nonnegative()
         .min(1, 'Debe tener al menos un caracter'),
 })
@@ -59,11 +59,11 @@ const putProductShema = z.object({
         .min(1, 'Debe tener al menos un caracter')
         .max(50, 'No debe tener mas de 50 caracteres'),
     precio: z
-        .number()
+        .number('El dato debe ser numerico')
         .positive(0, 'Debe ser un numero mayor a 0')
         .min(1, 'Debe tener al menos un caracter'),
     stock: z
-        .number()
+        .number('El dato debe ser numerico')
         .nonnegative()
         .min(1, 'Debe tener al menos un caracter'),
     estado: z

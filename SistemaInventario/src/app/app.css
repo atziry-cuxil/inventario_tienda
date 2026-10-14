@@ -22,3 +22,9 @@ button {
     width: 5rem;
     height: 1.9rem;
 }
+
+.errorMensaje{
+    background-color: rgb(255, 106, 106);
+    width: 10rem;
+    height: 5rem;
+}
