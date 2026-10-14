@@ -1,66 +1,30 @@
 import './table.css'
+import { apiClient } from '../api'
 
-const DataTable = ({ setForm }) => {
-    const data = [
-        {
-            "producto_id": 1,
-            "codigo": "otro",
-            "nombre": "otro",
-            "description": "otro",
-            "categoria": "otro",
-            "marca": "otro",
-            "precio": "10.00",
-            "stock": 3,
-            "estado": true,
-            "create_at": "2026-10-13T10:38:32.343Z"
-        },
-        {
-            "producto_id": 2,
-            "codigo": "23",
-            "nombre": "otro",
-            "description": "otro",
-            "categoria": "otro",
-            "marca": "otro",
-            "precio": "10.00",
-            "stock": 3,
-            "estado": true,
-            "create_at": "2026-10-13T10:43:09.033Z"
-        },
-        {
-            "producto_id": 3,
-            "codigo": "45",
-            "nombre": "jioj",
-            "description": "ogjh",
-            "categoria": "otro",
-            "marca": "otro",
-            "precio": "10.00",
-            "stock": 3,
-            "estado": true,
-            "create_at": "2026-10-13T10:43:30.332Z"
-        }
-    ]
+const DataTable = ({ setForm, data, setIdUpdate, setData }) => {
+
     const onUpdate = async (id) => {
-        console.log('actualizar')
         try {
-            const response = await apiClient.put(`products/:${id}`)
-            console.log('respuesta positiva')
+            const response = await apiClient.put(`/${id}`)
             console.log(response)
             return console.log(response.message)
         } catch (error) {
-            console.log('respuesta negativa')
             console.log(error)
         }
     }
 
     const onDelete = async (id) => {
-        console.log('eliminar')
         try {
-            const response = await apiClient.delete(`products/:${id}`)
-            console.log('respuesta positiva')
+            const response = await apiClient.delete(`/${id}`)
             console.log(response)
+            try {
+                const response = await apiClient.get('/')
+                return setData(response?.data?.data)
+            } catch (error) {
+                console.log(error)
+            }
             return console.log(response.message)
         } catch (error) {
-            console.log('respuesta negativa')
             console.log(error)
         }
     }
@@ -95,11 +59,10 @@ const DataTable = ({ setForm }) => {
                                 <td> {product.estado ? 'activo' : 'inactivo'} </td>
                                 <td>
                                     <button type='button' className='buttonUpdate' onClick={() => {
-                                        onUpdate(product.id)
-                                    }}  > {product.estado ? 'Desactivar' : 'Activar'}</button>
-                                    <button type='button' className='buttonDelete' onClick={() => {
-                                        onDelete(product.id)
-                                    }}> Eliminar</button>
+                                        setIdUpdate(product.producto_id)
+                                        setForm(true)
+                                    }}  >Editar </button>
+                                    <button type='button' className='buttonDelete' onClick={() => onDelete(product.producto_id)}> Eliminar</button>
                                 </td>
                             </tr>
                         ))}

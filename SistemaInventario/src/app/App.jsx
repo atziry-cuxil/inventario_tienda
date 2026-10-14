@@ -6,33 +6,46 @@ import { FormProducts } from "../form"
 import './app.css'
 
 function App() {
+  const [product, setProduct] = React.useState(null)
+  const [idUpdate, setIdUpdate] = React.useState(null)
   const [data, setData] = React.useState([])
-  const [form, setForm] = React.useState(true)
+  const [form, setForm] = React.useState(false)
 
   useEffect(() => {
     const getProducts = async () => {
       try {
-        const response = await apiClient.get('products/')
-        console.log('respuesta positiva')
-        console.log(response)
-        //return setData(response?.data)
+        const response = await apiClient.get('/')
+        return setData(response?.data?.data)
       } catch (error) {
-        console.log('respuesta negativa')
         console.log(error)
       }
     }
     getProducts();
-    console.log(data)
-  }, [data])
+  }, [form])
+
+  useEffect(() => {
+    const id = idUpdate
+    if (id === null) return
+    const getProduct = async (id) => {
+      try {
+        const response = await apiClient.get(`/${id}`)
+        return setProduct(response?.data?.data[0])
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    getProduct(id)
+  }, [idUpdate])
 
   return (
     <>
       <h1>Registro de productos </h1>
+
       {!form &&
-        <DataTable setForm={setForm} />
+        <DataTable setForm={setForm} data={data} setIdUpdate={setIdUpdate} setData={setData} />
       }
       {form &&
-        <FormProducts setForm={setForm} />
+        <FormProducts setForm={setForm} product={product} />
       }
     </>
   )

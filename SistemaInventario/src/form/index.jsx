@@ -2,32 +2,36 @@ import { useForm } from "react-hook-form"
 import { postProductShema } from "./productShema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import './form.css'
+import { apiClient } from "../api"
+import React, { useEffect } from "react"
 
-const FormProducts = ({ setForm }) => {
-    const formDefault = {
-        codigo: '',
-        nombre: '',
-        description: '',
-        categoria: '',
-        marca: '',
-        precio: 0,
-        stock: 0,
-        estado: true
-    }
-
+const FormProducts = ({ setForm, product }) => {
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm({
-        defaultValues: formDefault,
+        defaultValues: {
+            codigo: product?.codigo || '',
+            nombre: product?.nombre || '',
+            description: product?.description || '',
+            categoria: product?.categoria || '',
+            marca: product?.marca || '',
+            precio: parseFloat(product?.precio) || 0,
+            stock: parseFloat(product?.stock) || 0,
+            estado: product?.estado || true
+        },
         resolver: zodResolver(postProductShema)
     })
 
-    const onSubmit = (data) => {
-        console.log('hola')
-        console.log(data)
-        setForm(false)
+    const onSubmit = async (data) => {
+        try {
+            const response = await apiClient.post('/', data)
+            setForm(false)
+            return response
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     const error = (error) => {
@@ -40,12 +44,12 @@ const FormProducts = ({ setForm }) => {
             <form onSubmit={handleSubmit(onSubmit, error)}>
                 <div className="campo" >
                     <label htmlFor="codigo">Codigo del producto: </label>
-                    <input type="text" id="codigo" name="codigo" {...register('codigo')} placeholder="El. 001H" />
+                    <input type="text" id="codigo" name="codigo"  {...register('codigo')} placeholder="El. 001H" />
                 </div>
 
                 <div className="campo" >
                     <label htmlFor="nombre">Nombre del producto: </label>
-                    <input type="text" id="nombre" name="nombre" {...register('nombre')} placeholder="Ej.  " />
+                    <input type="text" id="nombre" name="nombre" {...register('nombre')} placeholder="Ej. " />
                 </div>
 
                 <div className="campo">
@@ -77,7 +81,7 @@ const FormProducts = ({ setForm }) => {
                     <label htmlFor="estado">Estado: </label>
                     <input type="text" id="estado" name="estado" {...register('estado')} />
                 </div>
-                <button type="submit" className="buttonEnviar"> Enviar </button>
+                <button type="submit" className="buttonEnviar" > Enviar </button>
             </form>
             <button type="button" className="buttonCancel" onClick={() => setForm(false)}> Cancelar </button>
         </div >

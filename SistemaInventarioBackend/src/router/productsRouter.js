@@ -12,6 +12,3 @@ productRouter.put('/:id', ValidateSchema(productsPutShema), putProduct)
 productRouter.delete('/:id', deleteProduct)
 
 export { productRouter }
-
-//codigo duplicado 40
-//id  inexistente 404
