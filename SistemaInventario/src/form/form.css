@@ -5,7 +5,8 @@
     flex-direction: column;
     text-align: center;
     width: 40rem;
-    background-color: rgb(172, 164, 164);
+    background-color: black;
+    color: white;
     border-radius: 1rem;
     padding: 1rem;
 }
@@ -15,6 +16,7 @@ input {
     height: 1.7rem;
     width: 30rem;
     border: none;
+    margin-bottom: 0.5rem;
 }
 
 .campo {
@@ -35,6 +37,10 @@ input {
 
 .buttonCancel {
     color: white;
-    background-color: black;
+    background-color: rgb(108, 103, 103);
     margin: 0.2rem;
+}
+
+.error {
+    color: red;
 }

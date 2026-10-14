@@ -12,12 +12,32 @@ const ValidateSchema = (body) => {
     }
 }
 
-const validacionId = (response, res, next) => {
-    if (response[0] == null || response[0] == undefined) {
-        return res.status(404).json({
-            message: 'Producto inexistente'
-        })
+
+const validateId = (response) => {
+    console.log(response)
+    return (req, res, next) => {
+        console.log('response')
+        if (response.length == 0) {
+            return res.status(404).json({
+                message: 'Producto inexistente'
+            })
+        }
+        next()
     }
 }
 
-export { ValidateSchema, validacionId }
+const validateCode = (error) => {
+    console.log(error)
+    return (req, res, next) => {
+        console.log('error dentro')
+        if (error) {
+            return res.status(409).json({
+                message: 'El código del producto ya existe'
+            });
+        }
+        next();
+    };
+
+};
+
+export { ValidateSchema, validateId, validateCode }

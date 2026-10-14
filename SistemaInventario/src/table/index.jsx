@@ -3,20 +3,9 @@ import { apiClient } from '../api'
 
 const DataTable = ({ setForm, data, setIdUpdate, setData }) => {
 
-    const onUpdate = async (id) => {
-        try {
-            const response = await apiClient.put(`/${id}`)
-            console.log(response)
-            return console.log(response.message)
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
     const onDelete = async (id) => {
         try {
             const response = await apiClient.delete(`/${id}`)
-            console.log(response)
             try {
                 const response = await apiClient.get('/')
                 return setData(response?.data?.data)
@@ -47,7 +36,7 @@ const DataTable = ({ setForm, data, setIdUpdate, setData }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {data.map(product => (
+                        {data?.map(product => (
                             <tr key={product.codigo}>
                                 <td> {product.codigo} </td>
                                 <td> {product.nombre} </td>

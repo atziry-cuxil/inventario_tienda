@@ -45,7 +45,7 @@ function App() {
         <DataTable setForm={setForm} data={data} setIdUpdate={setIdUpdate} setData={setData} />
       }
       {form &&
-        <FormProducts setForm={setForm} product={product} />
+        <FormProducts setForm={setForm} product={product} idUpdate={idUpdate} />
       }
     </>
   )

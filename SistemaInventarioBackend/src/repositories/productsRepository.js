@@ -1,4 +1,5 @@
 import { pool } from "../config/database.js";
+//import { validateCode } from "../middleware/validateSchemaMiddleware.js";
 
 const productsGet = async () => {
     try {
@@ -25,8 +26,9 @@ const productPost = async (req) => {
             values ($1, $2, $3, $4, $5, $6, $7)` , [codigo, nombre, description, categoria, marca, precio, stock])
         return response.rows
     } catch (error) {
-        console.log(error)
-        throw new Error('No se creo el nuevo producto')
+        if (error.routine != undefined) {
+            throw new Error('No se creo el nuevo producto')
+        }
     }
 }
 
