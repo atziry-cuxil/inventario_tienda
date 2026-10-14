@@ -1,5 +1,6 @@
 import { apiClient } from "../api"
 import { ErrorMensaje } from "./errorMessage"
+import React from "react"
 
 const Notify = ({ setConfirm, id, setData }) => {
     const [error, setError] = React.useState(null)
